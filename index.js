@@ -36,7 +36,7 @@ async function start() {
     if (guess > secretNumber) {
       console.log("Too High! Guess again!\n")
       max = guess
-    // reassigning the max to the guess allows for the guessing range to be narrowed down.
+      // reassigning the max to the guess allows for the guessing range to be narrowed down.
     } else if (guess < secretNumber) {
       console.log("Too low! Guess again!\n")
       min = guess + 1
@@ -82,10 +82,10 @@ async function start() {
             } else if (myGuess < cpuSecretNumber) {
               console.log("\nToo low guess again! ");
             } else {
-              if (turns > 7) {
-                console.log("\nYikes... I expected more from you. It took you " + turns + " tries!")
+              if (tries > 7) {
+                console.log("\nYikes... I expected more from you. It took you " + tries + " tries!")
               }
-              else if (turns < 7) {
+              else if (tries < 7) {
                 console.log("\nCongrats you got my number in " + tries + " tries")
               }
               gameWinner()
