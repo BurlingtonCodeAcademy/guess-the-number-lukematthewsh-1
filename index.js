@@ -7,6 +7,7 @@ function ask(questionText) {
   });
 }
 
+//---------------------------------------------------------------------------------
 
 start();
 
@@ -18,11 +19,13 @@ async function start() {
   function compGuess(max, min) {
     //compGuess = Function for Computer generated guess
     return (min) + Math.floor(Math.random() * (max - min))
-
   }
+
+//---------------------------------------------------------------------------------
+
   game()
 
-  async function game() {
+async function game() {
     let max = Number(process.argv[2]) || 100
     //allows user to input a mx number for the guessing range. If no number inputed will revert to 100
     let min = 1
@@ -45,66 +48,74 @@ async function start() {
       guess = compGuess(max, min)
       playerAnswer = await ask("Is your number " + guess + "? y/n ")
 
-      turns = turns + 1
+    turns = turns + 1
       // for each guess the turns will count up. 
-      if (guess > secretNumber) {
-        console.log("Too High! Guess again!\n")
-        max = guess
-      } else if (guess < secretNumber) {
-        console.log("Too low! Guess again!\n")
-        min = guess + 1
-      } else {
-        console.log("\nGreat job it only took you " + turns + " tries!")
-        cpuTest()
+    if (guess > secretNumber) {
+      console.log("Too High! Guess again!\n")
+      max = guess
+    } else if (guess < secretNumber) {
+      console.log("Too low! Guess again!\n")
+      min = guess + 1
+    } else {
+      console.log("\nGreat job it only took you " + turns + " tries!")
+      cpuTest()
         // this second function runs for the role reversal. 
-        async function cpuTest() {
+        
+//---------------------------------------------------------------------------------
+        
+async function cpuTest() {
 
-          function cpuNum(max) {
-            return Math.floor(Math.random() * Math.floor(max))
-          }
-          //generates random number
-          console.log("\nNow that I guessed your number try to guess mine!")
-          let cpuSecretNumber = cpuNum(100)
-          let tries = 1
-          // tries is how many times it takes user to guess computers number.
-          let myGuess = await ask("Guess a number between 1 and 100!");
-          console.log("Your guess is " + myGuess)
-          if (myGuess > cpuSecretNumber) {
-            console.log("\nToo High guess again! ");
-          } else if (myGuess < cpuSecretNumber) {
-            console.log("\nToo low guess again! ");
-          }
-          while (myGuess !== cpuSecretNumber) {
-            myGuess = await ask("Guess another number! ")
-            tries = tries + 1
-            if (myGuess > cpuSecretNumber) {
-              console.log("\nToo High guess again! ");
-            } else if (myGuess < cpuSecretNumber) {
-              console.log("\nToo low guess again! ");
-            } else {
-              if (tries > 7) {
-                console.log("\nYikes... I expected more from you. It took you " + tries + " tries!")
-              }
-              else if (tries < 7) {
-                console.log("\nCongrats you got my number in " + tries + " tries")
-              }
-              gameWinner()
-              // this function runs to check who is the overall winner. tries = computers turns, turns = user turns
-              function gameWinner() {
-                if (tries < turns) {
-                  console.log("Damn I lost :(")
-                }
-                else if (tries > turns) {
-                  console.log("Ha, I beat you :)")
-                }
-                else if (tries === turns) {
-                  console.log("Ah it looks to be a draw :|")
-                }
-              } process.exit()
-            }
-          }
-        }
-      }
+  function cpuNum(max) {
+      return Math.floor(Math.random() * Math.floor(max))}
+      //generates random number
+
+  console.log("\nNow that I guessed your number try to guess mine!")
+
+  let cpuSecretNumber = cpuNum(100)
+  let tries = 1
+      // tries is how many times it takes user to guess computers number.
+
+  let myGuess = await ask("Guess a number between 1 and 100!");
+      console.log("Your guess is " + myGuess)
+    if (myGuess > cpuSecretNumber) {
+      console.log("\nToo High guess again! ");
+    } else if (myGuess < cpuSecretNumber) {
+      console.log("\nToo low guess again! ");
+    }
+    while (myGuess !== cpuSecretNumber) {
+      myGuess = await ask("Guess another number! ")
+      tries = tries + 1
+    if (myGuess > cpuSecretNumber) {
+      console.log("\nToo High guess again! ");
+    } else if (myGuess < cpuSecretNumber) {
+      console.log("\nToo low guess again! ");
+    } else {
+      if (tries > 7) {
+        console.log("\nYikes... I expected more from you. It took you " + tries + " tries!")
+    }
+      else if (tries < 7) {
+        console.log("\nCongrats you got my number in " + tries + " tries")
+    }
+
+  //---------------------------------------------------------------------------------
+
+  gameWinner()
+  // this function runs to check who is the overall winner. tries = computers turns, turns = user turns
+  function gameWinner() {
+    if (tries < turns) {
+      console.log("Damn I lost :(")
+    }
+    else if (tries > turns) {
+      console.log("Ha, I beat you :)")
+    }
+    else if (tries === turns) {
+      console.log("Ah it looks to be a draw :|")
+    }
+    } process.exit()
+    }
+    }
+    }
+    }
     }
   }
 }
